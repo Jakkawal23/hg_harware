@@ -1,0 +1,37 @@
+[
+  {
+    "id": "c1",
+    "slug": "fasteners",
+    "name_th": "น็อต-สกรู",
+    "name_cn": "紧固件",
+    "icon": "Wrench"
+  },
+  {
+    "id": "c2",
+    "slug": "power-tools",
+    "name_th": "เครื่องมือไฟฟ้า",
+    "name_cn": "电动工具",
+    "icon": "Zap"
+  },
+  {
+    "id": "c3",
+    "slug": "hand-tools",
+    "name_th": "เครื่องมือช่าง",
+    "name_cn": "手工具",
+    "icon": "Hammer"
+  },
+  {
+    "id": "c4",
+    "slug": "safety-gear",
+    "name_th": "อุปกรณ์เซฟตี้",
+    "name_cn": "劳保用品",
+    "icon": "HardHat"
+  },
+  {
+    "id": "c5",
+    "slug": "construction-hardware",
+    "name_th": "ฮาร์ดแวร์ก่อสร้าง",
+    "name_cn": "建筑五金",
+    "icon": "Construction"
+  }
+]

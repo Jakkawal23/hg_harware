@@ -1,0 +1,127 @@
+[
+  {
+    "id": "p1",
+    "slug": "hex-bolt-din933-8-8",
+    "category_slug": "fasteners",
+    "name_th": "น็อตหัวหกเหลี่ยม DIN933 เกรด 8.8",
+    "name_cn": "外六角螺栓 DIN933 8.8级",
+    "short_description": {
+      "th": "น็อตหัวหกเหลี่ยมชุบซิงค์ขาว เกรดความแข็ง 8.8 ทนทานต่อแรงบิดและแรงดึงสูง เหมาะสำหรับงานโครงสร้างเหล็ก",
+      "cn": "镀白锌外六角螺栓，8.8级高强度，抗扭抗拉性能优异，适用于钢结构工程。"
+    },
+    "full_description_html": {
+      "th": "<h4>รายละเอียดสินค้า</h4><p>น็อตหัวหกเหลี่ยม (Hex Bolt) เกรด 8.8 มาตรฐาน DIN933 เป็นน็อตเหล็กกล้าคาร์บอนคุณภาพสูงที่ผ่านการชุบซิงค์ขาว (Zinc Plated) เพื่อป้องกันสนิมและการกัดกร่อน</p><ul><li><strong>เหมาะสำหรับ:</strong> งานโครงสร้างเหล็ก, งานประกอบเครื่องจักร, งานก่อสร้างทั่วไป</li><li><strong>คุณสมบัติเด่น:</strong> รับแรงดึงและแรงบิดได้สูง ไม่รูดง่าย ทนทานต่อสภาพแวดล้อม</li></ul>",
+      "cn": "<h4>产品详情</h4><p>外六角螺栓 (Hex Bolt) 8.8级 DIN933 标准，采用优质碳钢制造，表面镀白锌处理，有效防锈防腐蚀。</p><ul><li><strong>适用范围：</strong> 钢结构工程、机械装配、一般建筑施工</li><li><strong>产品特点：</strong> 高抗拉抗扭性能，不易滑丝，耐候性强。</li></ul>"
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1533022138988-c89b703661eb?q=80&w=2071&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1678111245607-db560a2cf95a?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "detail_infographic_images": [
+      "https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1974&auto=format&fit=crop"
+    ],
+    "pricing_tier": {
+      "type": "tiered",
+      "price_display": {
+        "th": "เริ่มต้น 55.00 - 85.00 บาท / กก.",
+        "cn": "起价 55.00 - 85.00 泰铢 / 公斤"
+      },
+      "tiers": [
+        { "min_qty": "1-9 กล่อง", "price": "85 THB / kg" },
+        { "min_qty": "10-49 กล่อง", "price": "70 THB / kg" },
+        { "min_qty": "50+ กล่อง", "price": "55 THB / kg" }
+      ]
+    },
+    "specs": {
+      "Grade": "8.8",
+      "Standard": "DIN 933",
+      "Material": "Carbon Steel (เหล็กคาร์บอน)",
+      "Surface": "Zinc Plated (ชุบซิงค์)",
+      "Size Range": "M6 - M30",
+      "Packaging": "25kg / Box"
+    },
+    "variants": [
+      "M6 x 15mm",
+      "M8 x 20mm",
+      "M10 x 30mm",
+      "M12 x 40mm"
+    ]
+  },
+  {
+    "id": "p2",
+    "slug": "angle-grinder-900w",
+    "category_slug": "power-tools",
+    "name_th": "เครื่องเจียรไฟฟ้า 4 นิ้ว 900W",
+    "name_cn": "4寸角磨机 900W",
+    "short_description": {
+      "th": "เครื่องเจียรไฟฟ้ากำลังสูง 900 วัตต์ สำหรับงานตัดและเจียรเหล็ก โลหะ",
+      "cn": "900W 大功率角磨机，适用于金属切割和打磨作业。"
+    },
+    "full_description_html": {
+      "th": "<h4>ข้อมูลเชิงเทคนิค</h4><p>เครื่องเจียรไฟฟ้ารุ่นงานหนัก มอเตอร์กำลังสูง 900W ช่วยให้รอบหมุนสม่ำเสมอ ตัดหรือเจียรได้รวดเร็วไม่สะดุด</p><ul><li>ออกแบบให้จับกระชับมือ ลดความเมื่อยล้า</li><li>ระบบระบายความร้อนที่ปรับปรุงใหม่ มอเตอร์ทนทานขึ้น</li></ul>",
+      "cn": "<h4>技术信息</h4><p>重型角磨机，900W 大功率电机，转速稳定，切割或打磨快速流畅。</p><ul><li>人体工学设计，握持舒适，减少疲劳。</li><li>改进的散热系统，电机更耐用。</li></ul>"
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "detail_infographic_images": [],
+    "pricing_tier": {
+      "type": "range",
+      "price_display": {
+        "th": "690.00 บาท / เครื่อง",
+        "cn": "690.00 泰铢 / 台"
+      },
+      "tiers": []
+    },
+    "specs": {
+      "Power": "900W",
+      "Voltage": "220V/50Hz",
+      "Disc Diameter": "100mm (4\")",
+      "No-Load Speed": "11000 RPM",
+      "Weight": "1.8 kg"
+    }
+  },
+  {
+    "id": "p3",
+    "slug": "safety-helmet-abs",
+    "category_slug": "safety-gear",
+    "name_th": "หมวกนิรภัยก่อสร้าง ABS",
+    "name_cn": "ABS 建筑安全帽",
+    "short_description": {
+      "th": "หมวกเซฟตี้วัสดุ ABS ทนแรงกระแทกสูง ได้มาตรฐาน มอก.",
+      "cn": "高抗冲 ABS 材质安全帽，符合认证标准。"
+    },
+    "full_description_html": {
+      "th": "<h4>ความปลอดภัยระดับสูงสุด</h4><p>ผลิตจากวัสดุ ABS (Acrylonitrile Butadiene Styrene) คุณภาพสูง ทนต่อแรงกระแทกและการเจาะทะลุได้ดีเยี่ยม</p><ul><li>สายรัดคางและรองในปรับระดับได้ 6 จุด</li><li>มีช่องระบายอากาศเพื่อความสบายในการสวมใส่ตลอดวัน</li></ul>",
+      "cn": "<h4>最高级别安全防护</h4><p>采用优质 ABS (丙烯腈-丁二烯-苯乙烯) 材料制造，具有卓越的抗冲击和抗穿刺性能。</p><ul><li>下颚带和内衬6点可调。</li><li>设有通风孔，全天佩戴舒适。</li></ul>"
+    },
+    "images": [
+      "https://images.unsplash.com/photo-1533227260814-1f7481a798f0?q=80&w=2070&auto=format&fit=crop"
+    ],
+    "detail_infographic_images": [],
+    "pricing_tier": {
+      "type": "tiered",
+      "price_display": {
+        "th": "เริ่มต้น 95.00 - 150.00 บาท / ใบ",
+        "cn": "起价 95.00 - 150.00 泰铢 / 顶"
+      },
+      "tiers": [
+        { "min_qty": "1-19 ใบ", "price": "150 THB / ใบ" },
+        { "min_qty": "20-99 ใบ", "price": "120 THB / ใบ" },
+        { "min_qty": "100+ ใบ", "price": "95 THB / ใบ" }
+      ]
+    },
+    "specs": {
+      "Material": "ABS Plastic",
+      "Color Options": "Yellow, White, Blue, Red",
+      "Suspension": "6-point webbing",
+      "Standard": "TIS / CE EN397"
+    },
+    "variants": [
+      "White",
+      "Yellow",
+      "Blue",
+      "Red"
+    ]
+  }
+]
