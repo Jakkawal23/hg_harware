@@ -1,4 +1,4 @@
-import { useTranslations, useLocale } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Truck, ShieldCheck, Factory, Building2, PackageCheck, HeadphonesIcon, Search } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
@@ -7,10 +7,12 @@ import productsData from '@/data/products.json';
 import categoriesData from '@/data/categories.json';
 import warehouseData from '@/data/warehouse.json';
 
-export default function HomePage() {
-  const t = useTranslations('Hero');
-  const cat = useTranslations('Categories');
-  const locale = useLocale();
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations('Hero');
+  const cat = await getTranslations('Categories');
 
   const featuredProducts = productsData.slice(0, 4);
 

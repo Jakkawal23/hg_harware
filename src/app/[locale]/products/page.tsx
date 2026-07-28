@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { ProductCard } from '@/components/product/ProductCard';
@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Search, Filter } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-export default function ProductsCatalog() {
+function ProductsCatalogContent() {
   const searchParams = useSearchParams();
   const defaultCategory = searchParams.get('category') || 'all';
   const defaultSearch = searchParams.get('search') || '';
@@ -105,3 +105,12 @@ export default function ProductsCatalog() {
     </div>
   );
 }
+
+export default function ProductsCatalog() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductsCatalogContent />
+    </Suspense>
+  );
+}
+

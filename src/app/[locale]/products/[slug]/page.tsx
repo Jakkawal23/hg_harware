@@ -1,11 +1,18 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import productsData from '@/data/products.json';
+import { setRequestLocale } from 'next-intl/server';
 import { ProductDetailClient } from './ProductDetailClient';
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
 };
+
+export function generateStaticParams() {
+  return productsData.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 export async function generateMetadata(
   { params }: Props
@@ -35,6 +42,7 @@ export async function generateMetadata(
 
 export default async function ProductDetailPage({ params }: Props) {
   const resolvedParams = await params;
+  setRequestLocale(resolvedParams.locale);
   const product = productsData.find((p) => p.slug === resolvedParams.slug);
 
   if (!product) {
