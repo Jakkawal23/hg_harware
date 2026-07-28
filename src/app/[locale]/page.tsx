@@ -183,6 +183,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 name_cn={product.name_cn}
                 image={product.images[0]}
                 specs={product.specs}
+                price_display={product.pricing_tier?.price_display}
               />
             ))}
           </div>

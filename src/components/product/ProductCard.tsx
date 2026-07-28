@@ -15,12 +15,14 @@ interface ProductProps {
   name_cn: string;
   image: string;
   specs: Record<string, any>;
+  price_display?: { th: string; cn: string };
 }
 
-export function ProductCard({ id, slug, name_th, name_cn, image, specs }: ProductProps) {
+export function ProductCard({ id, slug, name_th, name_cn, image, specs, price_display }: ProductProps) {
   const addItem = useQuoteStore(state => state.addItem);
   const locale = useLocale();
   const name = locale === 'cn' ? name_cn : name_th;
+  const price = price_display ? (locale === 'cn' ? price_display.cn : price_display.th) : null;
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -43,6 +45,12 @@ export function ProductCard({ id, slug, name_th, name_cn, image, specs }: Produc
           <h3 className="font-bold text-slate-900 line-clamp-2 leading-tight mb-1 group-hover:text-amber-600 transition-colors">
             {name}
           </h3>
+          
+          {price && (
+            <p className="text-brand-red font-semibold text-sm mb-2">
+              {price}
+            </p>
+          )}
           
           <div className="flex flex-wrap gap-1 mb-4 mt-auto">
             {Object.entries(specs).slice(0, 2).map(([key, value]) => (
