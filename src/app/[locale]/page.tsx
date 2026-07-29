@@ -49,11 +49,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4 md:pt-6">
             <Link href="/products">
-              <Button size="lg" className="bg-brand-red hover:bg-red-700 text-white font-bold text-base md:text-lg px-8 shadow-xl h-12 md:h-14 rounded-full w-full sm:w-auto">
+              <Button size="lg" className="bg-brand-red hover:bg-red-700 text-white font-bold text-base md:text-lg px-8 shadow-xl h-12 md:h-14 rounded-full w-full sm:w-auto cursor-pointer">
                 {locale === 'cn' ? '查看产品目录' : 'ดูแคตตาล็อกสินค้า'}
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold text-base md:text-lg px-8 shadow-xl h-12 md:h-14 rounded-full w-full sm:w-auto transition-all backdrop-blur-sm">
+            <Button size="lg" variant="outline" className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-bold text-base md:text-lg px-8 shadow-xl h-12 md:h-14 rounded-full w-full sm:w-auto transition-all backdrop-blur-sm cursor-pointer">
               {locale === 'cn' ? '联系销售团队' : 'ติดต่อฝ่ายขาย'}
             </Button>
           </div>
