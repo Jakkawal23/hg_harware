@@ -10,7 +10,8 @@ type Props = {
 
 export function generateStaticParams() {
   const productsData = getAllProducts();
-  return productsData.map((product) => ({
+  const allProducts = productsData.flatMap(g => g.products);
+  return allProducts.map((product) => ({
     slug: product.slug,
   }));
 }
@@ -35,7 +36,7 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      images: [product.images[0]],
+      images: [product.images ? product.images[0] : (product.image || '')],
       type: 'website',
     },
   };
@@ -58,7 +59,7 @@ export default async function ProductDetailPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: localizedName,
-    image: product.images[0],
+    image: product.images ? product.images[0] : (product.image || ''),
     description: description,
     sku: product.slug,
     offers: {

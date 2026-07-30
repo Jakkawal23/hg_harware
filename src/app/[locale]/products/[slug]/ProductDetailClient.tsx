@@ -51,32 +51,32 @@ export function ProductDetailClient({ product }: { product: any }) {
     }
   };
 
-  const handleThumbnailClick = (idx: number) => {
-    setActiveImageIndex(idx);
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: idx * scrollRef.current.offsetWidth,
-        behavior: 'smooth'
-      });
+  const displayImages = product.images && product.images.length > 0 ? product.images : (product.image ? [product.image] : ['/placeholder.png']);
+
+  const handleNext = () => {
+    if (activeImageIndex < displayImages.length - 1) {
+      setActiveImageIndex(prev => prev + 1);
+      scrollToIndex(activeImageIndex + 1);
     }
   };
 
-  const handleNext = () => {
-    if (!scrollRef.current) return;
-    const newIndex = Math.min(activeImageIndex + 1, product.images.length - 1);
-    scrollRef.current.scrollTo({
-      left: newIndex * scrollRef.current.offsetWidth,
-      behavior: 'smooth'
-    });
+  const handlePrev = () => {
+    if (activeImageIndex > 0) {
+      setActiveImageIndex(prev => prev - 1);
+      scrollToIndex(activeImageIndex - 1);
+    }
   };
 
-  const handlePrev = () => {
-    if (!scrollRef.current) return;
-    const newIndex = Math.max(activeImageIndex - 1, 0);
-    scrollRef.current.scrollTo({
-      left: newIndex * scrollRef.current.offsetWidth,
-      behavior: 'smooth'
-    });
+  const handleThumbnailClick = (index: number) => {
+    setActiveImageIndex(index);
+    scrollToIndex(index);
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.offsetWidth;
+      scrollRef.current.scrollTo({ left: width * index, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -95,7 +95,7 @@ export function ProductDetailClient({ product }: { product: any }) {
               className="bg-brand-surface flex items-center min-h-[300px] md:min-h-[400px] lg:min-h-[500px] w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar relative"
               onScroll={handleScroll}
             >
-              {product.images.map((img: string, idx: number) => (
+              {displayImages.map((img: string, idx: number) => (
                 <div key={idx} className="min-w-full w-full h-full snap-start flex items-center justify-center p-4 md:p-8">
                   <img 
                     src={img} 
@@ -107,7 +107,7 @@ export function ProductDetailClient({ product }: { product: any }) {
             </div>
 
             {/* Nav Buttons (Desktop hover) */}
-            {product.images.length > 1 && (
+            {displayImages.length > 1 && (
               <>
                 <button 
                   onClick={handlePrev}
@@ -118,8 +118,8 @@ export function ProductDetailClient({ product }: { product: any }) {
                 </button>
                 <button 
                   onClick={handleNext}
-                  className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full shadow-md opacity-0 group-hover/gallery:opacity-100 transition-opacity disabled:opacity-0 hidden md:block ${activeImageIndex === product.images.length - 1 ? 'pointer-events-none' : ''}`}
-                  disabled={activeImageIndex === product.images.length - 1}
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full shadow-md opacity-0 group-hover/gallery:opacity-100 transition-opacity disabled:opacity-0 hidden md:block ${activeImageIndex === displayImages.length - 1 ? 'pointer-events-none' : ''}`}
+                  disabled={activeImageIndex === displayImages.length - 1}
                 >
                   <ChevronRight className="h-6 w-6" />
                 </button>
@@ -127,9 +127,9 @@ export function ProductDetailClient({ product }: { product: any }) {
             )}
 
             {/* Thumbnails */}
-            {product.images.length > 1 && (
+            {displayImages.length > 1 && (
               <div className="flex gap-2 p-4 overflow-x-auto bg-slate-50 hide-scrollbar border-t border-slate-200">
-                {product.images.map((img: string, idx: number) => (
+                {displayImages.map((img: string, idx: number) => (
                   <button 
                     key={idx} 
                     onClick={() => handleThumbnailClick(idx)}
@@ -145,7 +145,7 @@ export function ProductDetailClient({ product }: { product: any }) {
           {/* Details & Pricing Content */}
           <div className="p-8 lg:p-12 flex flex-col bg-white">
             <Badge className="w-fit mb-4 bg-slate-100 text-brand-navy hover:bg-slate-200 uppercase tracking-wider text-[10px] font-bold border border-slate-200">
-              {product.category_slug.replace('-', ' ')}
+              {product.category_slug ? product.category_slug.replace('-', ' ') : (product.sub_category_slug ? product.sub_category_slug.replace('-', ' ') : 'HARDWARE')}
             </Badge>
             
             <h1 className="text-3xl font-extrabold text-brand-navy mb-4 leading-tight">

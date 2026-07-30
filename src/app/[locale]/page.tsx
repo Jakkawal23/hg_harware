@@ -15,7 +15,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const cat = await getTranslations('Categories');
 
   const productsData = getAllProducts();
-  const featuredProducts = productsData.slice(0, 4);
+  const featuredProducts = productsData.flatMap(g => g.products).slice(0, 4);
 
   return (
     <>
@@ -122,7 +122,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           {/* Horizontal Scroll (2-rows) on Mobile, Grid on Desktop */}
           <div className="grid grid-rows-2 grid-flow-col auto-cols-[110px] md:grid-rows-none md:grid-flow-row md:grid-cols-5 gap-3 md:gap-4 overflow-x-auto pb-4 snap-x hide-scrollbar">
             {categoriesData.map((category) => {
-              const catName = locale === 'cn' ? category.name_cn : category.name_th;
+              const catName = locale === 'cn' ? category.name_cn : (category.name_th_short || category.name_th);
               return (
                 <Link 
                   href={`/products?category=${category.slug}`} 
@@ -182,9 +182,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 slug={product.slug}
                 name_th={product.name_th}
                 name_cn={product.name_cn}
-                image={product.images[0]}
-                specs={product.specs}
-                price_display={product.pricing_tier?.price_display}
+                image={product.images ? product.images[0] : product.image}
+                specs={product.specs || {}}
+                price_display={product.pricing_tier?.price_display || product.price?.toString()}
               />
             ))}
           </div>

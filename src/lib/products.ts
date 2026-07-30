@@ -5,17 +5,26 @@ import path from 'path';
 export interface Product {
   id: string;
   slug: string;
-  category_slug: string;
-  sub_category_slug?: string;
   name_th: string;
   name_cn: string;
-  short_description: Record<string, string>;
-  full_description_html: Record<string, string>;
-  images: string[];
+  short_description?: Record<string, string>;
+  full_description_html?: Record<string, string>;
+  images?: string[];
+  image?: string;
   detail_infographic_images?: string[];
-  pricing_tier: any;
-  specs: Record<string, string>;
+  pricing_tier?: any;
+  specs?: Record<string, string>;
   variants?: string[];
+  price?: number;
+}
+
+export interface ProductGroup {
+  id: string;
+  main_category_slug: string;
+  sub_category_slug: string;
+  name_th: string;
+  name_cn: string;
+  products: Product[];
 }
 
 const productsDirectory = path.join(process.cwd(), 'src/data/products');
@@ -40,33 +49,39 @@ function getAllJsonFiles(dirPath: string, arrayOfFiles: string[] = []) {
 }
 
 /**
- * Reads all product JSON files and returns an array of products
+ * Reads all product JSON files and returns an array of product groups
  */
-export function getAllProducts(): Product[] {
+export function getAllProducts(): ProductGroup[] {
   if (!fs.existsSync(productsDirectory)) {
     return [];
   }
   
   const files = getAllJsonFiles(productsDirectory);
-  const products: Product[] = [];
+  const groups: ProductGroup[] = [];
 
   for (const file of files) {
     try {
       const fileContents = fs.readFileSync(file, 'utf8');
-      const product = JSON.parse(fileContents);
-      products.push(product);
+      const group = JSON.parse(fileContents) as ProductGroup;
+      groups.push(group);
     } catch (error) {
       console.error(`Error reading product file ${file}:`, error);
     }
   }
 
-  return products;
+  return groups;
 }
 
 /**
  * Gets a single product by slug
  */
 export function getProductBySlug(slug: string): Product | undefined {
-  const allProducts = getAllProducts();
-  return allProducts.find((p) => p.slug === slug);
+  const allGroups = getAllProducts();
+  for (const group of allGroups) {
+    const product = group.products.find((p) => p.slug === slug);
+    if (product) {
+      return product;
+    }
+  }
+  return undefined;
 }

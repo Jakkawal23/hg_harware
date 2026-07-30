@@ -10,9 +10,17 @@ import { Badge } from '@/components/ui/badge';
 // Types
 type Product = any; 
 type Category = any;
+type ProductGroup = {
+  id: string;
+  main_category_slug: string;
+  sub_category_slug: string;
+  name_th: string;
+  name_cn: string;
+  products: Product[];
+};
 
 interface Props {
-  products: Product[];
+  products: ProductGroup[]; // We pass ProductGroup[] now from page.tsx
   categories: Category[];
 }
 
@@ -42,17 +50,30 @@ function ProductsCatalogContent({ products, categories }: Props) {
   }, [activeCategory, currentMainCategory]);
 
   // Filter logic
-  const filteredProducts = products.filter(product => {
-    const matchesMainCat = product.category_slug === activeCategory;
-    const matchesSubCat = activeSubCategory ? product.sub_category_slug === activeSubCategory : true;
-    
-    const matchesSearch = searchQuery === '' || 
-      product.name_th.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      product.name_cn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.slug.toLowerCase().includes(searchQuery.toLowerCase());
-      
-    return matchesMainCat && matchesSubCat && matchesSearch;
-  });
+  const filteredGroups = products
+    .filter(group => {
+      const matchesMainCat = group.main_category_slug === activeCategory;
+      const matchesSubCat = activeSubCategory ? group.sub_category_slug === activeSubCategory : true;
+      return matchesMainCat && matchesSubCat;
+    })
+    .map(group => {
+      // Filter products inside the group based on search query
+      const filteredProductsInGroup = group.products.filter(product => {
+        const matchesSearch = searchQuery === '' || 
+          product.name_th.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          product.name_cn.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.slug.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesSearch;
+      });
+      return {
+        ...group,
+        products: filteredProductsInGroup
+      };
+    })
+    .filter(group => group.products.length > 0); // Hide empty groups
+
+  // Calculate total products matching for the badge
+  const totalProductsMatch = filteredGroups.reduce((acc, group) => acc + group.products.length, 0);
 
   return (
     <div className="bg-slate-50 min-h-screen pb-12">
@@ -80,7 +101,7 @@ function ProductsCatalogContent({ products, categories }: Props) {
             </h3>
             <ul className="flex flex-row overflow-x-auto md:flex-col gap-2 md:gap-1 pb-1 md:pb-0 hide-scrollbar snap-x">
               {categories.map(cat => {
-                const catName = locale === 'cn' ? cat.name_cn : cat.name_th;
+                const catName = locale === 'cn' ? cat.name_cn : (cat.name_th_short || cat.name_th);
                 const isActive = activeCategory === cat.slug;
                 return (
                   <li key={cat.id} className="snap-start flex-shrink-0 md:w-full">
@@ -131,7 +152,7 @@ function ProductsCatalogContent({ products, categories }: Props) {
                     ? currentMainCategory.sub_categories.find((sc:any) => sc.slug === activeSubCategory).name_cn
                     : currentMainCategory.sub_categories.find((sc:any) => sc.slug === activeSubCategory).name_th)
                 : (locale === 'cn' ? currentMainCategory?.name_cn : currentMainCategory?.name_th)}
-              <Badge variant="secondary" className="bg-slate-200 text-slate-700 font-bold">{filteredProducts.length}</Badge>
+              <Badge variant="secondary" className="bg-slate-200 text-slate-700 font-bold">{totalProductsMatch}</Badge>
             </h2>
           </div>
 
@@ -140,7 +161,7 @@ function ProductsCatalogContent({ products, categories }: Props) {
             <div className="bg-transparent md:bg-white pb-3 md:p-4 md:rounded-xl md:shadow-sm md:border md:border-slate-100 mb-2 md:mb-6 z-20">
               <ul className="flex flex-row overflow-x-auto gap-2 md:gap-3 hide-scrollbar snap-x">
                 {currentMainCategory.sub_categories.map((subCat: any) => {
-                  const subCatName = locale === 'cn' ? subCat.name_cn : subCat.name_th;
+                  const subCatName = locale === 'cn' ? subCat.name_cn : (subCat.name_th_short || subCat.name_th);
                   const isActive = activeSubCategory === subCat.slug;
                   return (
                     <li key={subCat.id} className="snap-start flex-shrink-0">
@@ -162,8 +183,8 @@ function ProductsCatalogContent({ products, categories }: Props) {
             </div>
           )}
 
-          {/* Product Grid */}
-          {filteredProducts.length === 0 ? (
+          {/* Product Groups */}
+          {filteredGroups.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center py-20 bg-white rounded-xl border border-slate-100 shadow-sm">
               <div className="h-16 w-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mb-4">
                 <Search className="h-8 w-8" />
@@ -171,18 +192,27 @@ function ProductsCatalogContent({ products, categories }: Props) {
               <p className="text-slate-500 text-lg">{locale === 'cn' ? '没有找到相关产品' : 'ไม่พบสินค้าที่คุณค้นหา'}</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 pb-10">
-              {filteredProducts.map(product => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  slug={product.slug}
-                  name_th={product.name_th}
-                  name_cn={product.name_cn}
-                  images={product.images}
-                  specs={product.specs}
-                  price_display={product.pricing_tier?.price_display}
-                />
+            <div className="flex flex-col gap-8 pb-10">
+              {filteredGroups.map(group => (
+                <div key={`${group.main_category_slug}-${group.sub_category_slug}-${group.id}`} className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 md:p-6">
+                  <h3 className="text-lg font-bold text-brand-navy mb-4 border-b border-slate-100 pb-2">
+                    {locale === 'cn' ? group.name_cn : group.name_th}
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+                    {group.products.map(product => (
+                      <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        slug={product.slug}
+                        name_th={product.name_th}
+                        name_cn={product.name_cn}
+                        images={product.images || [product.image]}
+                        specs={product.specs}
+                        price_display={product.pricing_tier?.price_display || product.price?.toString()}
+                      />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           )}

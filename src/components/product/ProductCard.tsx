@@ -96,7 +96,7 @@ export function ProductCard({ id, slug, name_th, name_cn, images, image, specs, 
           )}
           
           <div className="flex flex-wrap gap-1 mb-3 mt-auto">
-            {Object.entries(specs).slice(0, 2).map(([key, value]) => (
+            {specs && Object.entries(specs).slice(0, 2).map(([key, value]) => (
               <Badge variant="secondary" key={key} className="text-[10px] bg-slate-100 text-slate-600 font-normal">
                 {value}
               </Badge>
