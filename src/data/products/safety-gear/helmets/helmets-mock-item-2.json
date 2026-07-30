@@ -1,0 +1,50 @@
+{
+  "id": "p-helmets-2",
+  "slug": "helmets-mock-item-2",
+  "category_slug": "safety-gear",
+  "sub_category_slug": "helmets",
+  "name_th": "หมวกนิรภัย รุ่นทดสอบ 2",
+  "name_cn": "安全帽 测试型号 2",
+  "short_description": {
+    "th": "รายละเอียดแบบย่อสำหรับ หมวกนิรภัย หมายเลข 2 สินค้าคุณภาพสูง",
+    "cn": "这是关于 安全帽 2 的简短描述，高品质产品。"
+  },
+  "full_description_html": {
+    "th": "<h4>รายละเอียดสินค้า</h4><p>นี่คือข้อมูลจำลองของ หมวกนิรภัย หมายเลข 2 สำหรับใช้ทดสอบระบบ</p><ul><li>คุณสมบัติ 1</li><li>คุณสมบัติ 2</li></ul>",
+    "cn": "<h4>产品详情</h4><p>这是 安全帽 2 的测试数据，用于系统测试。</p><ul><li>特点 1</li><li>特点 2</li></ul>"
+  },
+  "images": [
+    "https://picsum.photos/seed/p-helmets-21/800/800",
+    "https://picsum.photos/seed/p-helmets-22/800/800"
+  ],
+  "pricing_tier": {
+    "type": "range",
+    "price_display": {
+      "th": "200.00 - 300.00 บาท",
+      "cn": "200.00 - 300.00 泰铢"
+    },
+    "tiers": []
+  },
+  "specs": {
+    "Brand": "MockBrand",
+    "Material": "Standard"
+  },
+  "items": [
+    {
+      "id": "p-helmets-2-sku-1",
+      "sku": "SKU-p-helmets-2-1",
+      "name_th": "ขนาดเล็ก",
+      "name_cn": "小号",
+      "price": 200,
+      "stock": 50
+    },
+    {
+      "id": "p-helmets-2-sku-2",
+      "sku": "SKU-p-helmets-2-2",
+      "name_th": "ขนาดใหญ่",
+      "name_cn": "大号",
+      "price": 300,
+      "stock": 20
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 "use client";
 import { useQuoteStore } from '@/store/useQuoteStore';
 import { Button } from '@/components/ui/button';
-import { Plus, ArrowLeft, CheckCircle2, MessageCircle, AlertCircle } from 'lucide-react';
+import { Plus, ArrowLeft, CheckCircle2, MessageCircle, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useLocale } from 'next-intl';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 
 export function ProductDetailClient({ product }: { product: any }) {
@@ -38,6 +38,47 @@ export function ProductDetailClient({ product }: { product: any }) {
     toast.success(locale === 'th' ? 'เพิ่มลงในรายการขอใบเสนอราคาแล้ว' : '已添加到报价单');
   };
 
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const scrollLeft = scrollRef.current.scrollLeft;
+    const width = scrollRef.current.offsetWidth;
+    const newIndex = Math.round(scrollLeft / width);
+    if (newIndex !== activeImageIndex) {
+      setActiveImageIndex(newIndex);
+    }
+  };
+
+  const handleThumbnailClick = (idx: number) => {
+    setActiveImageIndex(idx);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        left: idx * scrollRef.current.offsetWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNext = () => {
+    if (!scrollRef.current) return;
+    const newIndex = Math.min(activeImageIndex + 1, product.images.length - 1);
+    scrollRef.current.scrollTo({
+      left: newIndex * scrollRef.current.offsetWidth,
+      behavior: 'smooth'
+    });
+  };
+
+  const handlePrev = () => {
+    if (!scrollRef.current) return;
+    const newIndex = Math.max(activeImageIndex - 1, 0);
+    scrollRef.current.scrollTo({
+      left: newIndex * scrollRef.current.offsetWidth,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="container mx-auto max-w-7xl px-4 py-8 pb-24 md:pb-8">
       <Link href="/products" className="inline-flex items-center text-slate-500 hover:text-brand-red font-bold mb-6 transition-colors">
@@ -48,18 +89,52 @@ export function ProductDetailClient({ product }: { product: any }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           
           {/* Image Gallery */}
-          <div className="flex flex-col border-b lg:border-b-0 lg:border-r border-slate-200">
-            <div className="bg-brand-surface p-8 flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
-              <img 
-                src={product.images[0]} 
-                alt={localizedName} 
-                className="max-w-full max-h-[500px] object-contain rounded-lg shadow-sm bg-white p-4"
-              />
+          <div className="flex flex-col border-b lg:border-b-0 lg:border-r border-slate-200 relative group/gallery">
+            <div 
+              ref={scrollRef}
+              className="bg-brand-surface flex items-center min-h-[300px] md:min-h-[400px] lg:min-h-[500px] w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar relative"
+              onScroll={handleScroll}
+            >
+              {product.images.map((img: string, idx: number) => (
+                <div key={idx} className="min-w-full w-full h-full snap-start flex items-center justify-center p-4 md:p-8">
+                  <img 
+                    src={img} 
+                    alt={`${localizedName} - Image ${idx + 1}`} 
+                    className="max-w-full max-h-[500px] object-contain rounded-lg shadow-sm bg-white p-2 md:p-4"
+                  />
+                </div>
+              ))}
             </div>
+
+            {/* Nav Buttons (Desktop hover) */}
             {product.images.length > 1 && (
-              <div className="flex gap-2 p-4 overflow-x-auto bg-slate-50">
+              <>
+                <button 
+                  onClick={handlePrev}
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full shadow-md opacity-0 group-hover/gallery:opacity-100 transition-opacity disabled:opacity-0 hidden md:block ${activeImageIndex === 0 ? 'pointer-events-none' : ''}`}
+                  disabled={activeImageIndex === 0}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button 
+                  onClick={handleNext}
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full shadow-md opacity-0 group-hover/gallery:opacity-100 transition-opacity disabled:opacity-0 hidden md:block ${activeImageIndex === product.images.length - 1 ? 'pointer-events-none' : ''}`}
+                  disabled={activeImageIndex === product.images.length - 1}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+
+            {/* Thumbnails */}
+            {product.images.length > 1 && (
+              <div className="flex gap-2 p-4 overflow-x-auto bg-slate-50 hide-scrollbar border-t border-slate-200">
                 {product.images.map((img: string, idx: number) => (
-                  <button key={idx} className={`flex-shrink-0 w-20 h-20 rounded-md border-2 overflow-hidden ${idx === 0 ? 'border-brand-red' : 'border-transparent hover:border-slate-300'}`}>
+                  <button 
+                    key={idx} 
+                    onClick={() => handleThumbnailClick(idx)}
+                    className={`flex-shrink-0 w-20 h-20 rounded-md border-2 overflow-hidden transition-all ${activeImageIndex === idx ? 'border-brand-red opacity-100' : 'border-transparent opacity-60 hover:opacity-100 hover:border-slate-300'}`}
+                  >
                     <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover bg-white" />
                   </button>
                 ))}

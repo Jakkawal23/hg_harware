@@ -3,7 +3,7 @@ import { Truck, ShieldCheck, Factory, Building2, PackageCheck, HeadphonesIcon, S
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/product/ProductCard';
-import productsData from '@/data/products.json';
+import { getAllProducts } from '@/lib/products';
 import categoriesData from '@/data/categories.json';
 import warehouseData from '@/data/warehouse.json';
 
@@ -14,6 +14,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('Hero');
   const cat = await getTranslations('Categories');
 
+  const productsData = getAllProducts();
   const featuredProducts = productsData.slice(0, 4);
 
   return (

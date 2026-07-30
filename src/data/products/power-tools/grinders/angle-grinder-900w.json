@@ -1,0 +1,35 @@
+{
+  "id": "p2",
+  "slug": "angle-grinder-900w",
+  "category_slug": "power-tools",
+  "sub_category_slug": "grinders",
+  "name_th": "เครื่องเจียรไฟฟ้า 4 นิ้ว 900W",
+  "name_cn": "4寸角磨机 900W",
+  "short_description": {
+    "th": "เครื่องเจียรไฟฟ้ากำลังสูง 900 วัตต์ สำหรับงานตัดและเจียรเหล็ก โลหะ",
+    "cn": "900W 大功率角磨机，适用于金属切割和打磨作业。"
+  },
+  "full_description_html": {
+    "th": "<h4>ข้อมูลเชิงเทคนิค</h4><p>เครื่องเจียรไฟฟ้ารุ่นงานหนัก มอเตอร์กำลังสูง 900W ช่วยให้รอบหมุนสม่ำเสมอ ตัดหรือเจียรได้รวดเร็วไม่สะดุด</p><ul><li>ออกแบบให้จับกระชับมือ ลดความเมื่อยล้า</li><li>ระบบระบายความร้อนที่ปรับปรุงใหม่ มอเตอร์ทนทานขึ้น</li></ul>",
+    "cn": "<h4>技术信息</h4><p>重型角磨机，900W 大功率电机，转速稳定，切割或打磨快速流畅。</p><ul><li>人体工学设计，握持舒适，减少疲劳。</li><li>改进的散热系统，电机更耐用。</li></ul>"
+  },
+  "images": [
+    "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=2070&auto=format&fit=crop"
+  ],
+  "detail_infographic_images": [],
+  "pricing_tier": {
+    "type": "range",
+    "price_display": {
+      "th": "690.00 บาท / เครื่อง",
+      "cn": "690.00 泰铢 / 台"
+    },
+    "tiers": []
+  },
+  "specs": {
+    "Power": "900W",
+    "Voltage": "220V/50Hz",
+    "Disc Diameter": "100mm (4\")",
+    "No-Load Speed": "11000 RPM",
+    "Weight": "1.8 kg"
+  }
+}

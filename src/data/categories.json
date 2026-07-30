@@ -4,34 +4,104 @@
     "slug": "fasteners",
     "name_th": "น็อต-สกรู",
     "name_cn": "紧固件",
-    "icon": "Wrench"
+    "icon": "Wrench",
+    "sub_categories": [
+      {
+        "id": "sc-hex-bolts",
+        "slug": "hex-bolts",
+        "name_th": "น็อตหัวหกเหลี่ยม",
+        "name_cn": "外六角螺栓"
+      },
+      {
+        "id": "sc-threaded-rods",
+        "slug": "threaded-rods",
+        "name_th": "สตัดเกลียวเต็ม",
+        "name_cn": "全牙丝杆"
+      }
+    ]
   },
   {
     "id": "c2",
     "slug": "power-tools",
     "name_th": "เครื่องมือไฟฟ้า",
     "name_cn": "电动工具",
-    "icon": "Zap"
+    "icon": "Zap",
+    "sub_categories": [
+      {
+        "id": "sc-grinders",
+        "slug": "grinders",
+        "name_th": "เครื่องเจียร",
+        "name_cn": "角磨机"
+      },
+      {
+        "id": "sc-drills",
+        "slug": "drills",
+        "name_th": "สว่านไฟฟ้า",
+        "name_cn": "电钻"
+      }
+    ]
   },
   {
     "id": "c3",
     "slug": "hand-tools",
     "name_th": "เครื่องมือช่าง",
     "name_cn": "手工具",
-    "icon": "Hammer"
+    "icon": "Hammer",
+    "sub_categories": [
+      {
+        "id": "sc-wrenches",
+        "slug": "wrenches",
+        "name_th": "ประแจ",
+        "name_cn": "扳手"
+      },
+      {
+        "id": "sc-screwdrivers",
+        "slug": "screwdrivers",
+        "name_th": "ไขควง",
+        "name_cn": "螺丝刀"
+      }
+    ]
   },
   {
     "id": "c4",
     "slug": "safety-gear",
     "name_th": "อุปกรณ์เซฟตี้",
     "name_cn": "劳保用品",
-    "icon": "HardHat"
+    "icon": "HardHat",
+    "sub_categories": [
+      {
+        "id": "sc-helmets",
+        "slug": "helmets",
+        "name_th": "หมวกนิรภัย",
+        "name_cn": "安全帽"
+      },
+      {
+        "id": "sc-gloves",
+        "slug": "gloves",
+        "name_th": "ถุงมือเซฟตี้",
+        "name_cn": "安全手套"
+      }
+    ]
   },
   {
     "id": "c5",
     "slug": "construction-hardware",
     "name_th": "ฮาร์ดแวร์ก่อสร้าง",
     "name_cn": "建筑五金",
-    "icon": "Construction"
+    "icon": "Construction",
+    "sub_categories": [
+      {
+        "id": "sc-hinges",
+        "slug": "hinges",
+        "name_th": "บานพับ",
+        "name_cn": "铰链"
+      },
+      {
+        "id": "sc-padlocks",
+        "slug": "padlocks",
+        "name_th": "แม่กุญแจ",
+        "name_cn": "挂锁"
+      }
+    ]
   }
 ]

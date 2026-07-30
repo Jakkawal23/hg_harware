@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import productsData from '@/data/products.json';
+import { getAllProducts, getProductBySlug } from '@/lib/products';
 import { setRequestLocale } from 'next-intl/server';
 import { ProductDetailClient } from './ProductDetailClient';
 
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
+  const productsData = getAllProducts();
   return productsData.map((product) => ({
     slug: product.slug,
   }));
@@ -18,7 +19,7 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
   const resolvedParams = await params;
-  const product = productsData.find((p) => p.slug === resolvedParams.slug);
+  const product = getProductBySlug(resolvedParams.slug);
 
   if (!product) {
     return {};
@@ -43,7 +44,7 @@ export async function generateMetadata(
 export default async function ProductDetailPage({ params }: Props) {
   const resolvedParams = await params;
   setRequestLocale(resolvedParams.locale);
-  const product = productsData.find((p) => p.slug === resolvedParams.slug);
+  const product = getProductBySlug(resolvedParams.slug);
 
   if (!product) {
     notFound();
